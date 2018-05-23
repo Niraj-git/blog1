@@ -13,7 +13,12 @@ user_list = [
 ]
 
 user_list.each do |email, name, city, mobile|
-users =  User.create( email: email, user_name: name, user_city: city, user_mobile: mobile )
+  users =  User.create( email: email, user_name: name, user_city: city, user_mobile: mobile )
 end
+role_list = ["admin","user"]
+role_list.each do |name|
+  roles =  Role.create(name: name)
+end
+
 
 # Post.create(me: "title",text: "text", user_id: User.find_by_user_id)
