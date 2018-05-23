@@ -1,0 +1,14 @@
+%p{id: "notice"}
+  = notice
+%p
+  %strong User_id:
+  = @post.user_id
+%p
+  %strong Title:
+  = @post.title
+%p
+  %strong Description:
+  = @post.description
+
+= link_to 'Edit', edit_user_post_path(current_user, @post) |
+= link_to 'Back', user_posts_path

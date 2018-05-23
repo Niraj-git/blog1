@@ -1,0 +1,22 @@
+%div
+  - @posts.each do |post|
+    
+    %div
+      %h1         
+        = link_to post.title, user_post_path(current_user, post)
+        
+    %div
+      %p
+        - if current_user.id==post.user.id
+          = link_to 'Edit', edit_user_post_path(current_user, post)
+          = link_to 'Destroy',user_post_path(current_user, post), method: :delete, data: { confirm: 'Are you sure?' }
+      %p{style: "color: gray"}  
+        = "Posted on"
+        = time_ago_in_words post.created_at
+        = "Posted by"
+        = post.user.user_name
+
+    %div
+      %p
+        = post.description
+    %br
