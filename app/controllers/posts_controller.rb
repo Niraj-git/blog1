@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :verify_authenticity_token, :only => [:destroy]
-
+  # skip_before_filter :verify_authenticity_token, :only => [:destroy]
+  skip_before_action :verify_authenticity_token, :only => [:destroy]
   # GET /posts
   # GET /posts.json
   def index    
@@ -66,8 +66,7 @@ class PostsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      byebug
+    def set_post      
       @post = Post.find(params[:id])
     end
 
