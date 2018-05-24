@@ -4,5 +4,16 @@ class Post < ActiveRecord::Base
 
   validates :title, :description, :presence => true
   validates :title, :length => { :minimum => 2}
-  validates :title, :uniqueness => true
+  #validates :title, :uniqueness => true
+
+  # validates :status, presence: true 
+  
+  before_save :default_values
+  def default_values
+    byebug
+    self.status ||= 'pending'
+  end
+  # before_create do
+  #   self.status = "pending" if status.blank?
+  # end
 end

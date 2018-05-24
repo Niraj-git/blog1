@@ -12,13 +12,20 @@
   %tbody
     - @posts.each do |post|
       %tr
-        %td<%= post.user_id %>
-        %td<%= post.title %>
-        %td<%= post.description %>
-        %td<%= post.user.user_name %>
-        %td<%= link_to 'Show', user_post_path(current_user, post) %>
-        %td<%= link_to 'Edit', edit_user_post_path(current_user, post) %>
-        %td<%= link_to 'Destroy',user_post_path(current_user, post), method: :delete, data: { confirm: 'Are you sure?' } %>      
+        %td
+          = post.user_id
+        %td
+          = post.title
+        %td
+          = post.description
+        %td
+          = post.user.user_name
+        %td
+          = link_to 'Show', user_post_path(current_user, post)
+        %td
+          = link_to 'Edit', edit_user_post_path(current_user, post)
+        %td
+          = link_to 'Destroy',user_post_path(current_user, post), method: :delete, data: { confirm: 'Are you sure?' }
     
 %br
 

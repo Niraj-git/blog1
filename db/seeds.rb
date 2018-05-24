@@ -6,6 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+role_list = ["admin","user"]
+role_list.each do |name|
+  roles =  Role.find_or_create_by(name: name)
+end
+
 user_list = [
   ["user1@example.com", "sachin", "Surat", 123],
   ["user2@example.com", "salman", "Ahmedabad", 123],
@@ -13,12 +18,21 @@ user_list = [
 ]
 
 user_list.each do |email, name, city, mobile|
-  users =  User.create( email: email, user_name: name, user_city: city, user_mobile: mobile )
-end
-role_list = ["admin","user"]
-role_list.each do |name|
-  roles =  Role.create(name: name)
+  users =  User.find_or_create_by(email: email) do |user|
+    user.user_name = name
+    user.user_city = city    
+    user.user_mobile = mobile
+  end  
 end
 
+user = User.find_or_create_by(email: "admin@example.com") do |user|
+  user.password = "adminadmin"
+  user.password_confirmation = "adminadmin"
+end
+user.add_role :admin
 
+# Post.all.each do |post|  
+#   post.status = "pending"
+#   post.save
+# end
 # Post.create(me: "title",text: "text", user_id: User.find_by_user_id)

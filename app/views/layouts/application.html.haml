@@ -11,12 +11,12 @@
   
     %p{ class: "alert"}
     = alert
-- if user_signed_in?
-  %li
-  = link_to('Logout', destroy_user_session_path)
-  = link_to 'New Post', new_user_post_path(current_user)
-- else
-  %li
+- if user_signed_in?  
+  = link_to('Logout', destroy_user_session_path) 
+  = link_to 'New Post', new_user_post_path(current_user) 
+  - if current_user.has_role? :admin
+    = link_to 'admin', admin_index_path
+- else  
   = link_to('Login', new_user_session_path)
 
 = yield
