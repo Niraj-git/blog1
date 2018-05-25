@@ -10,8 +10,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable  
  after_save :default_values
-  def default_values
-    byebug
+  def default_values    
     #self.add_role ||= 'user'
     self.add_role :user
   end

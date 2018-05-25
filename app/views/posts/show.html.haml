@@ -10,5 +10,7 @@
   %strong Description:
   = @post.description
 
-= link_to 'Edit', edit_user_post_path(current_user, @post) |
+- if can? :update, @post
+  = link_to 'Edit', edit_user_post_path(current_user, @post) |
+
 = link_to 'Back', user_posts_path

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'admin/disapprove_post'
   get 'admin/index'
   get 'admin/update_post_status'
   devise_for :users, controllers: { sessions: 'users/sessions' }

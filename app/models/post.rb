@@ -9,8 +9,7 @@ class Post < ActiveRecord::Base
   # validates :status, presence: true 
   
   before_save :default_values
-  def default_values
-    byebug
+  def default_values    
     self.status ||= 'pending'
   end
   # before_create do
