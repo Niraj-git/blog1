@@ -4,6 +4,9 @@
   %strong User_id:
   = @post.user_id
 %p
+  = image_tag @post.media.url(:thumb)
+
+%p
   %strong Title:
   = @post.title
 %p
@@ -14,3 +17,31 @@
   = link_to 'Edit', edit_user_post_path(current_user, @post) |
 
 = link_to 'Back', user_posts_path
+/ = link_to 'comment', new_user_post_comment_path(current_user, @post)
+
+= form_for([current_user, @post, @comment]) do |f|
+  -if @comment.errors.any?
+    %div{ id: "error_explanation"}
+      %h2
+        = pluralize(@comment.errors.count, "error") 
+        prohibited this comment from being saved:
+
+      %ul
+        @comment.errors.full_messages.each do |message|
+        %li
+          = message
+
+  %div{ class: "field" }
+    = f.label :commentbody
+    %br
+    = f.text_area :commentbody
+  
+  %div{ class: "actions"}
+    = f.submit
+
+%h4 
+  %u Comments :
+
+- @comments.each do |comment|
+  = comment.commentbody
+  %hr
