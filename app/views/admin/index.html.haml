@@ -1,0 +1,37 @@
+%h1 Pending Posts
+
+%table
+  %thead
+    %tr
+      %th Userid
+      %th Title
+      %th Description
+      %th Name
+      %th{ colspan:"4"}
+  
+  %tbody
+    - @posts.each do |post|
+      %tr
+        %td
+          = post.user_id
+        %td
+          = post.title
+        %td
+          = post.description
+        %td
+          = post.user.user_name
+        %td
+          = link_to 'Show', user_post_path(current_user, post)
+        %td
+          = link_to 'Edit', edit_user_post_path(current_user, post)
+        %td
+          = link_to 'Destroy',user_post_path(current_user, post), method: :delete, data: { confirm: 'Are you sure?' }
+        %td
+          = link_to 'update-status', admin_update_post_status_path(post_id: post.id)
+        %td
+          = link_to 'disapprove', admin_disapprove_post_path(post_id: post.id)
+    
+%br
+
+= link_to 'New Post', new_user_post_path(current_user)
+
