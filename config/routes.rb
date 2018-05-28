@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'admin/update_post_status'
   devise_for :users, controllers: { sessions: 'users/sessions' }
   
+  # post "/create_comment" => "comments#create_comment"
+  post "/random_comment" => "comments#random_comment"
   resources :users do
     resources :posts do
       resources :comments 

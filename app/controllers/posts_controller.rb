@@ -18,7 +18,7 @@ class PostsController < ApplicationController
     @comment = Comment.new
 
     @comments = @post.comments.order("created_at DESC")
-
+   
     authorize! :none ,@post    
   end
 

@@ -31,6 +31,19 @@
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
 
+  <div class="field">
+    <%= f.label :user_name %> <i>(You may change your name.)</i><br />
+    <%= f.user_name_field :user_name, autocomplete: "off" %>
+  </div>
+  <div class="field">
+    <%= f.label :user_city %> <i>(You may change your city.)</i><br />
+    <%= f.user_city_field :user_city, autocomplete: "off" %>
+  </div>
+  <div class="field">
+    <%= f.label :user_mobile %> <i>(You may change cell number)</i><br />
+    <%= f.user_mobile_field :user_mobile, autocomplete: "off" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Update" %>
   </div>

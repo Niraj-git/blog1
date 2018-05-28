@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_24_083518) do
+ActiveRecord::Schema.define(version: 2018_05_25_143334) do
 
   create_table "comments", force: :cascade do |t|
-    t.integer "postid"
-    t.integer "userid"
+    t.integer "post_id"
+    t.integer "user_id"
     t.text "commentbody"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -27,6 +27,10 @@ ActiveRecord::Schema.define(version: 2018_05_24_083518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
+    t.string "media_file_name"
+    t.string "media_content_type"
+    t.integer "media_file_size"
+    t.datetime "media_updated_at"
   end
 
   create_table "roles", force: :cascade do |t|

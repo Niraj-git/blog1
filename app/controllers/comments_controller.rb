@@ -1,6 +1,24 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
 
+  # def create_comment
+  #   puts "****************************************************"
+  #   @comment = Comment.new({commentbody: params[:commentbody], post_id: params[:post_id]})
+  #   @comment.user_id = current_user.id
+  #   if @comment.save
+  #     render json: {comment: @comment.as_json}
+  #   end
+  # end
+
+  def create_comment
+    puts ":::::::::::::::::::::::::::::::::::"
+    @comment = Comment.new({commentbody: params[:commentbody], post_id: params[:post_id]})
+    @comment.user_id = current_user.id
+    if @comment.save
+      render json: {comment: @comment.as_json}
+    end
+  end
+
   # GET /comments
   # GET /comments.json
   def index

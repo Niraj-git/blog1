@@ -35,13 +35,42 @@
     = f.label :commentbody
     %br
     = f.text_area :commentbody
-  
+    %input{type: "hidden", id: "post_id", value: @post.id}
   %div{ class: "actions"}
-    = f.submit
+    %input{type: "button", value: "Create Comment", onclick: "createCommit()"}
 
 %h4 
   %u Comments :
 
-- @comments.each do |comment|
-  = comment.commentbody
-  %hr
+%div#comment_list
+  - @comments.each do |comment|
+    %p
+      = comment.commentbody
+    %hr
+
+:javascript
+  function createCommit(){
+    d = { 
+      commentbody: $("#comment_commentbody").val(),
+      post_id: $("#post_id").val()
+    }
+  
+    $.ajax({
+      url: "/random_comment",
+      method: "post",
+      data: d,
+      
+      success: function(data, response){    
+        console.log()         
+        p = $('<p/>', { text: data.comment.commentbody})
+        h = $('<hr/>')
+        b = $('<br/>')
+        $("#comment_list").append(b)
+        $("#comment_list").prepend(h)
+        $("#comment_list").prepend(p)
+      },
+      error: function(data, response){
+        alert("random comment error");
+      }
+    })
+  }
