@@ -1,27 +1,26 @@
 %div
-
   - @posts.each do |post|    
-    %div
-      %h1         
-        = link_to post.title, user_post_path(post.user, post)        
-    %div
-      %p
-      - if user_signed_in?
+    %div{ class: "box", style: "border: 1px solid lightgray;" "margin-bottom: 1%;" "padding: 1%;" }
+        
+      %div
+        %h1         
+          = link_to post.title, user_post_path(post.user, post)        
+      %div
         %p
-        - if current_user.id == post.user.id
-          = link_to 'Edit', edit_user_post_path(current_user, post)
-          = link_to 'Destroy',user_post_path(current_user, post), method: :delete, data: { confirm: 'Are you sure?' }        
+        - if user_signed_in?
+          %p
+          - if current_user.id == post.user.id            
+            = link_to 'Edit', edit_user_post_path(current_user, post)
+            = link_to 'Destroy',user_post_path(current_user, post), method: :delete, data: { confirm: 'Are you sure?' } 
 
-      %p{style: "color: gray"}  
-        = "Posted on"
-        = time_ago_in_words post.created_at
-        = "Posted by"
-        = post.user.user_name
+          %p{style: "color: gray"}  
+            = "Posted on"
+            = post.created_at.strftime("%d/%m/%Y")            
 
-    %div
-      %p         
-        = post.status
-    %div
-      %p
-        = post.description
-    %br
+            = "|  Posted by"
+            = post.user.user_name
+      
+      %div
+        %p
+          = post.description
+      %br

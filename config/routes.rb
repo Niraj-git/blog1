@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   get 'admin/disapprove_post'
   get 'admin/index'
   get 'admin/update_post_status'
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
   
-  # post "/create_comment" => "comments#create_comment"
-  post "/random_comment" => "comments#random_comment"
+  post "/create_comment" => "comments#create_comment"  
+  get "/show_profile" => "profiles#show_profile"  
   resources :users do
     resources :posts do
       resources :comments 

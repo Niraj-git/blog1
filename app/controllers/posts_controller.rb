@@ -19,7 +19,7 @@ class PostsController < ApplicationController
 
     @comments = @post.comments.order("created_at DESC")
    
-    authorize! :none ,@post    
+    authorize! :read, @post    
   end
 
   # GET /posts/new

@@ -1,43 +1,41 @@
 %p{id: "notice"}
   = notice
-%p
-  %strong User_id:
-  = @post.user_id
-%p
-  = image_tag @post.media.url(:thumb)
+%div{class: "post box", style: "text-align: center;"} 
+  %p
+    %input{type: "hidden", id: "user_post_id", value: @post.user_id}  
 
-%p
-  %strong Title:
-  = @post.title
-%p
-  %strong Description:
-  = @post.description
+  %p{class: "title", style: "font-weight: 400; font-size: 32px; margin-bottom: 14px; letter-spacing: 0; color: #3a3a3a;"}    
+    = @post.title
+    
+  %p
+    = image_tag @post.media.url(:thumb)
+  
+  %p{class: "discrip", style:"width: 745px; margin-left: auto; margin-right: auto;" }    
+    = @post.description
 
-- if can? :update, @post
-  = link_to 'Edit', edit_user_post_path(current_user, @post) |
+  - if can? :update, @post
+    = link_to 'Edit', edit_user_post_path(current_user, @post) |
 
-= link_to 'Back', user_posts_path
-/ = link_to 'comment', new_user_post_comment_path(current_user, @post)
+  = link_to 'Back', home_index_path
+  / = link_to 'comment', new_user_post_comment_path(current_user, @post)
 
-= form_for([current_user, @post, @comment]) do |f|
-  -if @comment.errors.any?
-    %div{ id: "error_explanation"}
-      %h2
-        = pluralize(@comment.errors.count, "error") 
-        prohibited this comment from being saved:
+  = form_for([current_user, @post, @comment]) do |f|
+    -if @comment.errors.any?
+      %div{ id: "error_explanation"}
+        %h2
+          = pluralize(@comment.errors.count, "error") 
+          prohibited this comment from being saved:
 
-      %ul
-        @comment.errors.full_messages.each do |message|
-        %li
-          = message
+        %ul
+          @comment.errors.full_messages.each do |message|
+          %li
+            = message
 
-  %div{ class: "field" }
-    = f.label :commentbody
-    %br
-    = f.text_area :commentbody
-    %input{type: "hidden", id: "post_id", value: @post.id}
-  %div{ class: "actions"}
-    %input{type: "button", value: "Create Comment", onclick: "createCommit()"}
+    %div{ class: "field" }
+      = f.text_area :commentbody, {style:"width: 500px; height: 150p;"}
+      %input{type: "hidden", id: "post_id", value: @post.id}
+    %div{ class: "actions"}
+      %input{type: "button", value: "Create Comment", onclick: "createCommit()"}
 
 %h4 
   %u Comments :
@@ -56,7 +54,7 @@
     }
   
     $.ajax({
-      url: "/random_comment",
+      url: "/create_comment",
       method: "post",
       data: d,
       
@@ -70,7 +68,7 @@
         $("#comment_list").prepend(p)
       },
       error: function(data, response){
-        alert("random comment error");
+        alert("create comment error");
       }
     })
   }

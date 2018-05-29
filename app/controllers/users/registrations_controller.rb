@@ -2,7 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   # def new
@@ -14,11 +14,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  GET /resource/edit
-  def edit
-     super
-  end
+  # GET /resource/edit
+  # def edit(resource, params)
+  #   resource.update_without_password(params)
+  
+  #   super
 
+  #   respond_to do |format|
+  #     if @post.update(post_params)
+  #       format.html { redirect_to [current_user,@post], notice: 'Post was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @post }
+  #     else
+  #       format.html { redirect_to [current_user, @user] }
+  #       format.json { render json: @post.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+
+  #   def params1
+  #     params.require(:user_registration).permit(:user_name, :user_city, :user_mobile)      
+  #   end  
+  # end
+  
   # PUT /resource
   # def update
   #   super
@@ -46,9 +62,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:user_name, :user_city, :user_mobile])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
